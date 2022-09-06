@@ -3,7 +3,7 @@ package com.booster.codetestapp.data.provider
 import android.content.Context
 import android.content.SharedPreferences
 import com.booster.codetestapp.data.adapter.BoostOrderJsonAdapter
-import com.booster.codetestapp.data.model.BoostOrder
+import com.globallogic.core.domain.model.BoostOrder
 
 class PreferencesProvider(
     context: Context,

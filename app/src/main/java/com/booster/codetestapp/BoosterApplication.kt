@@ -8,7 +8,6 @@ import org.koin.core.context.startKoin
 import timber.log.Timber
 import timber.log.Timber.DebugTree
 
-
 class BoosterApplication : Application() {
     override fun onCreate() {
         super.onCreate()
@@ -22,7 +21,5 @@ class BoosterApplication : Application() {
             androidContext(this@BoosterApplication)
             modules(appModule)
         }
-
-        Timber.d("app created")
     }
 }

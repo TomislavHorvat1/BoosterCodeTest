@@ -1,4 +1,4 @@
-package com.booster.codetestapp.data.model
+package com.globallogic.core.domain.model
 
 data class BoostOrder(
     val windowTime: Int,
