@@ -2,11 +2,12 @@ package com.booster.codetestapp.ui.view
 
 import androidx.compose.runtime.Composable
 import com.booster.codetestapp.ui.view.landing.LandingScreen
+import com.booster.codetestapp.ui.view.orderconfig.OrderConfigurationScreen
 
 enum class BoosterScreen(
-    val body: @Composable ((String) -> Unit) -> Unit
+    val body: @Composable ((String) -> Unit) -> Unit,
 ) {
     Map(body = { LandingScreen() }),
-    DeliveryConfiguration(body = { DeliveryConfigurationScreen() }),
+    DeliveryConfiguration(body = { OrderConfigurationScreen() }),
     DeliveryProgress(body = { DeliveryProgressScreen() }),
 }

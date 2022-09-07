@@ -6,6 +6,8 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Menu
 import androidx.compose.material.icons.outlined.HelpOutline
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
@@ -14,11 +16,13 @@ import androidx.compose.ui.unit.dp
 import com.booster.codetestapp.ui.theme.Purple200
 import com.booster.codetestapp.ui.theme.Purple700
 import com.booster.codetestapp.ui.viewmodel.LandingScreenViewModel
+import com.globallogic.core.domain.model.FuelPrice
+import org.koin.androidx.compose.getViewModel
 
 @Composable
 fun LandingScreen() {
-
-    val viewModel = LandingScreenViewModel()
+    val viewModel: LandingScreenViewModel = getViewModel()
+    val fuelPrice: FuelPrice? by viewModel.fuelPrice.observeAsState()
 
     Scaffold(
         topBar = {
@@ -38,7 +42,8 @@ fun LandingScreen() {
             Column {
                 MapCard()
                 PricesFooter(
-                    fuelPrice = viewModel.fuelPrice.value,
+                    regular = fuelPrice?.regular,
+                    premium = fuelPrice?.premium,
                 )
                 GradientButton(
                     text = "Next",
@@ -58,7 +63,7 @@ fun LandingScreen() {
 }
 
 @Composable
-fun Toolbar() {
+private fun Toolbar() {
     Box(
         modifier = Modifier
             .fillMaxWidth()
@@ -78,4 +83,3 @@ fun Toolbar() {
         }
     }
 }
-

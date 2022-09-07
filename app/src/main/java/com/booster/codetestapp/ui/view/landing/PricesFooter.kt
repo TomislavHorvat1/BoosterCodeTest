@@ -11,15 +11,14 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.globallogic.core.domain.model.FuelPrice
+import com.globallogic.core.domain.model.Fuel
 
 @Composable
 fun PricesFooter(
-    fuelPrice: FuelPrice?,
+    regular: Fuel?,
+    premium: Fuel?,
 ) {
     Row(horizontalArrangement = Arrangement.SpaceBetween) {
-        val regular = fuelPrice?.regular
-        val premium = fuelPrice?.premium
         Column(
             modifier = Modifier
                 .padding(vertical = 16.dp)
@@ -38,8 +37,7 @@ fun PricesFooter(
             Text(
                 text = regular
                     ?.price
-                    ?.formatCurrency(regular.currency)
-                    ?: "",
+                    ?.formatCurrency(regular.currency) ?: "",
                 fontWeight = FontWeight.SemiBold,
                 color = Color.Black,
                 textAlign = TextAlign.Center,
@@ -73,8 +71,7 @@ fun PricesFooter(
             Text(
                 text = premium
                     ?.price
-                    ?.formatCurrency(premium.currency)
-                    ?: "",
+                    ?.formatCurrency(premium.currency) ?: "",
                 fontWeight = FontWeight.SemiBold,
                 color = Color.Black,
                 textAlign = TextAlign.Center,
