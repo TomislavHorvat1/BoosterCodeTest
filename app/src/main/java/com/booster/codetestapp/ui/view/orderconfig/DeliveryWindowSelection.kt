@@ -19,12 +19,12 @@ import com.booster.codetestapp.ui.theme.BoosterCodeTestTheme
 import com.booster.codetestapp.ui.theme.Purple200
 import com.booster.codetestapp.ui.theme.Purple700
 import com.booster.codetestapp.ui.theme.TransparentWhite
-import com.globallogic.core.domain.model.OrderWindow
+import com.globallogic.core.domain.model.DeliveryWindow
 
 @Composable
 fun DeliveryWindowSelection(
-    morning: OrderWindow?,
-    afternoon: OrderWindow?,
+    morning: DeliveryWindow?,
+    afternoon: DeliveryWindow?,
     selectedWindow: Int,
     onOrderWindowClicked: (Int) -> Unit
 ) {

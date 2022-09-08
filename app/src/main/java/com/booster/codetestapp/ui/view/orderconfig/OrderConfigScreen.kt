@@ -19,7 +19,7 @@ import org.koin.androidx.compose.getViewModel
 @Composable
 fun OrderConfigurationScreen() {
     val viewModel: OrderConfigViewModel = getViewModel()
-    val orderWindows = viewModel.orderWindows.observeAsState()
+    val deliveryWindow = viewModel.deliveryWindows.observeAsState()
     val selectedWindow = viewModel.selectedOrderWindow.observeAsState()
     val userPaymentMethods = viewModel.userPaymentMethods.observeAsState()
 
@@ -43,8 +43,8 @@ fun OrderConfigurationScreen() {
                 verticalArrangement = Arrangement.SpaceBetween
             ) {
                 DeliveryWindowSelection(
-                    morning = orderWindows.value?.get(0),
-                    afternoon = orderWindows.value?.get(1),
+                    morning = deliveryWindow.value?.get(0),
+                    afternoon = deliveryWindow.value?.get(1),
                     selectedWindow = selectedWindow.value ?: -1,
                     onOrderWindowClicked = { id ->
                         viewModel.onOrderWindowClicked(id)
@@ -63,7 +63,6 @@ fun OrderConfigurationScreen() {
                     onClick = { /*TODO*/ },
                     enabled = selectedWindow.value?.let { it > -1 } ?: false
                 )
-
             }
         }
     }

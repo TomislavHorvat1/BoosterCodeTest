@@ -3,6 +3,7 @@ package com.booster.codetestapp.di
 import com.booster.codetestapp.data.adapter.BoostOrderJsonAdapter
 import com.booster.codetestapp.data.provider.MoshiProvider
 import com.booster.codetestapp.data.provider.PreferencesProvider
+import com.booster.codetestapp.ui.viewmodel.DeliveryProgressViewModel
 import com.booster.codetestapp.ui.viewmodel.LandingScreenViewModel
 import com.booster.codetestapp.ui.viewmodel.OrderConfigViewModel
 import org.koin.androidx.viewmodel.dsl.viewModel
@@ -20,4 +21,5 @@ val appModule = module {
 
     viewModel { LandingScreenViewModel() }
     viewModel { OrderConfigViewModel() }
+    viewModel { DeliveryProgressViewModel() }
 }

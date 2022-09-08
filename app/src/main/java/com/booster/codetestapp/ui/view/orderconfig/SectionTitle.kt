@@ -18,7 +18,7 @@ import java.util.*
 @Composable
 fun SectionTitle(
     title: String,
-    subtitle: String,
+    subtitle: String? = null,
 ) {
     Column(modifier = Modifier.padding(horizontal = 8.dp)) {
         Text(
@@ -28,22 +28,22 @@ fun SectionTitle(
             fontSize = 12.sp,
             color = Color.DarkGray,
             modifier = Modifier
-                .fillMaxWidth()
                 .padding(start = 8.dp)
         )
-        Text(
-            text = subtitle.replaceFirstChar { if (it.isLowerCase()) it.titlecase(Locale.getDefault()) else it.toString() },
-            textAlign = TextAlign.Start,
-            fontWeight = FontWeight.Light,
-            fontSize = 11.sp,
-            color = Color.DarkGray,
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(
-                    start = 8.dp,
-                    bottom = 8.dp,
-                )
-        )
+        subtitle?.let {
+            Text(
+                text = subtitle.replaceFirstChar { if (it.isLowerCase()) it.titlecase(Locale.getDefault()) else it.toString() },
+                textAlign = TextAlign.Start,
+                fontWeight = FontWeight.Light,
+                fontSize = 11.sp,
+                color = Color.DarkGray,
+                modifier = Modifier
+                    .padding(
+                        start = 8.dp,
+                        bottom = 8.dp,
+                    )
+            )
+        }
     }
 }
 
