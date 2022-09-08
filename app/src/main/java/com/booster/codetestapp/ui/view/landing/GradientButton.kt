@@ -15,14 +15,29 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.booster.codetestapp.ui.theme.Purple200
+import com.booster.codetestapp.ui.theme.Purple700
 
 @Composable
 fun GradientButton(
+    enabled: Boolean = true,
     text: String,
-    gradient: Brush,
     modifier: Modifier = Modifier,
-    onClick: () -> Unit = { },
+    onClick: () -> Unit,
 ) {
+    val enabledGradient = Brush.horizontalGradient(
+        colors = listOf(
+            Purple200,
+            Purple700,
+        )
+    )
+    val disabledGradient = Brush.horizontalGradient(
+        colors = listOf(
+            Color.Gray,
+            Color.Gray,
+        )
+    )
+
     Box(modifier = Modifier.padding(8.dp)) {
         Button(
             modifier = modifier,
@@ -32,14 +47,15 @@ fun GradientButton(
         ) {
             Box(
                 modifier = Modifier
-                    .background(gradient)
+                    .background(if (enabled) enabledGradient else disabledGradient)
                     .then(modifier),
                 contentAlignment = Alignment.Center,
             ) {
                 Text(
                     text = text,
                     fontSize = 16.sp,
-                    fontWeight = FontWeight.Normal
+                    fontWeight = FontWeight.Normal,
+                    color = if (enabled) Color.White else Color.Black
                 )
             }
         }

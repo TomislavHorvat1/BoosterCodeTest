@@ -10,8 +10,8 @@ import com.globallogic.core.domain.model.PaymentMethodType
 class OrderConfigViewModel : ViewModel() {
     private val _orderWindows = MutableLiveData<List<OrderWindow>>()
     val orderWindows: LiveData<List<OrderWindow>> = _orderWindows
-    private val _selectedOrderWindows = MutableLiveData<List<Int>>(listOf())
-    val selectedOrderWindows: LiveData<List<Int>> = _selectedOrderWindows
+    private val _selectedOrderWindow = MutableLiveData<Int>()
+    val selectedOrderWindow: LiveData<Int> = _selectedOrderWindow
     private val _userPaymentMethods = MutableLiveData<List<PaymentMethod>>(listOf())
     val userPaymentMethods: LiveData<List<PaymentMethod>> = _userPaymentMethods
 
@@ -51,11 +51,6 @@ class OrderConfigViewModel : ViewModel() {
     }
 
     fun onOrderWindowClicked(id: Int) {
-        val newList = _selectedOrderWindows.value?.toMutableList() ?: mutableListOf()
-        newList.removeIf { it == id }.let {
-            if (!it) newList.add(id)
-        }
-
-        _selectedOrderWindows.value = newList.toList()
+        _selectedOrderWindow.value = id
     }
 }

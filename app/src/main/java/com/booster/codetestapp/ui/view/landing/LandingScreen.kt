@@ -10,11 +10,8 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
-import com.booster.codetestapp.ui.theme.Purple200
-import com.booster.codetestapp.ui.theme.Purple700
 import com.booster.codetestapp.ui.viewmodel.LandingScreenViewModel
 import com.globallogic.core.domain.model.FuelPrice
 import org.koin.androidx.compose.getViewModel
@@ -47,15 +44,10 @@ fun LandingScreen() {
                 )
                 GradientButton(
                     text = "Next",
-                    gradient = Brush.horizontalGradient(
-                        colors = listOf(
-                            Purple200,
-                            Purple700,
-                        )
-                    ),
                     modifier = Modifier
                         .fillMaxWidth()
-                        .height(48.dp)
+                        .height(48.dp),
+                    onClick = { /* TODO */ }
                 )
             }
         }

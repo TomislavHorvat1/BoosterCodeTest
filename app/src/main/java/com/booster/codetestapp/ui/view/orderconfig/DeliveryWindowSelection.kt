@@ -25,7 +25,7 @@ import com.globallogic.core.domain.model.OrderWindow
 fun DeliveryWindowSelection(
     morning: OrderWindow?,
     afternoon: OrderWindow?,
-    selectedWindows: List<Int>,
+    selectedWindow: Int,
     onOrderWindowClicked: (Int) -> Unit
 ) {
     Column(
@@ -48,7 +48,7 @@ fun DeliveryWindowSelection(
                         id = morning.id,
                         windowName = morning.rangeName,
                         windowRange = "${morning.startTime} - ${morning.endTime}",
-                        selected = selectedWindows.contains(morning.id),
+                        selected = selectedWindow == morning.id,
                         onSelected = { onOrderWindowClicked(morning.id) },
                         modifier = Modifier.padding(end = 4.dp),
                     )
@@ -60,7 +60,7 @@ fun DeliveryWindowSelection(
                         id = afternoon.id,
                         windowName = afternoon.rangeName,
                         windowRange = "${afternoon.startTime} - ${afternoon.endTime}",
-                        selected = selectedWindows.contains(afternoon.id),
+                        selected = selectedWindow == afternoon.id,
                         onSelected = { onOrderWindowClicked(afternoon.id) },
                         modifier = Modifier.padding(start = 4.dp),
                     )
