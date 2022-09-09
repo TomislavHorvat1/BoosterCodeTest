@@ -7,11 +7,9 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.booster.codetestapp.framework.BoosterScreen.Landing
-import com.booster.codetestapp.framework.BoosterScreen.OrderConfig
-import com.booster.codetestapp.framework.BoosterScreen.DeliveryProgress
+import com.booster.codetestapp.framework.BoosterScreen.*
 import com.booster.codetestapp.ui.theme.BoosterCodeTestTheme
-import com.booster.codetestapp.ui.view.deliveryProgress.DeliveryProgressScreen
+import com.booster.codetestapp.ui.view.deliveryprogress.DeliveryProgressScreen
 import com.booster.codetestapp.ui.view.landing.LandingScreen
 import com.booster.codetestapp.ui.view.orderconfig.OrderConfigurationScreen
 

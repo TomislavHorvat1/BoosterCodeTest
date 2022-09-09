@@ -1,7 +1,7 @@
 package com.booster.codetestapp
 
 import android.app.Application
-import com.booster.codetestapp.di.appModule
+import com.booster.codetestapp.framework.di.appModule
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
 import org.koin.core.context.startKoin

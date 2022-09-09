@@ -1,7 +1,9 @@
 package com.globallogic.core.data
 
 import com.globallogic.core.domain.model.BoostOrder
+import kotlinx.coroutines.flow.Flow
 
 interface BoosterDataSource {
-    fun getActiveOrder(): BoostOrder
+    fun setActiveOrder(order: BoostOrder): Flow<BoostOrder>
+    fun getActiveOrder(): Flow<BoostOrder?>
 }

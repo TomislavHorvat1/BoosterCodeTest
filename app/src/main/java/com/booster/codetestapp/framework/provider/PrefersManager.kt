@@ -2,7 +2,7 @@ package com.booster.codetestapp.framework.provider
 
 import android.content.Context
 import android.content.SharedPreferences
-import com.booster.codetestapp.adapter.BoostOrderJsonAdapter
+import com.booster.codetestapp.framework.adapter.BoostOrderJsonAdapter
 import com.globallogic.core.domain.model.BoostOrder
 
 class PrefersManager(
@@ -11,22 +11,22 @@ class PrefersManager(
 ) {
 
     companion object {
-        private const val ORDER = "order"
+        private const val DATA = "data"
         private const val ACTIVE_ORDER = "active_order"
     }
 
     private val prefs: SharedPreferences =
         context.getSharedPreferences(
-            ORDER,
+            ACTIVE_ORDER,
             Context.MODE_PRIVATE,
         )
 
     var activeOrder: BoostOrder?
-        get() = adapter.fromJson(prefs.getString(ACTIVE_ORDER, null))
+        get() = adapter.fromJson(prefs.getString(DATA, null))
         set(value) = prefs
             .edit()
             .putString(
-                ACTIVE_ORDER,
+                DATA,
                 value?.let {
                     adapter.toJson(it)
                 })

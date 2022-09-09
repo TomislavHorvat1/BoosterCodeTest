@@ -1,4 +1,4 @@
-package com.booster.codetestapp.ui.view.deliveryProgress
+package com.booster.codetestapp.ui.view.deliveryprogress
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*

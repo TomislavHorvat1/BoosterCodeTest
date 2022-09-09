@@ -1,4 +1,4 @@
-package com.booster.codetestapp.ui.view.deliveryProgress
+package com.booster.codetestapp.ui.view.deliveryprogress
 
 import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.layout.*
@@ -54,7 +54,7 @@ fun DeliveryProgressScreen(onCancel: () -> Unit) {
                     val cardName = selectedPaymentMethod.type
                     SelectedOptionWindow(
                         label = "Selected payment method",
-                        name = selectedPaymentMethod.name?.let { "$cardName - it" }
+                        name = selectedPaymentMethod.name?.let { "$cardName - $it" }
                             ?: "$cardName",
                         value = selectedPaymentMethod.value,
                         modifier = Modifier.weight(1f)

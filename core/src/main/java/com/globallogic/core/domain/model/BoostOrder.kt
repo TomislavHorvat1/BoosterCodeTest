@@ -1,6 +1,6 @@
 package com.globallogic.core.domain.model
 
 data class BoostOrder(
-    val windowTime: Int,
+    val deliveryWindow: DeliveryWindow,
     val paymentMethod: PaymentMethod,
 )
