@@ -27,11 +27,11 @@ import com.globallogic.core.domain.model.PaymentMethodType
 @Composable
 fun PaymentMethodSection(
     paymentMethods: List<PaymentMethod>,
+    selectedPaymentMethod: Int,
+    onSelectedPaymentMethod: (Int) -> Unit,
     modifier: Modifier
 ) {
     var expanded by remember { mutableStateOf(false) }
-    var selectedIndex by remember { mutableStateOf(0) }
-    var selected = paymentMethods[selectedIndex]
 
     Column(
         modifier = modifier.padding(8.dp)
@@ -46,18 +46,23 @@ fun PaymentMethodSection(
             modifier = Modifier
                 .padding(horizontal = 8.dp)
                 .clickable { expanded = !expanded }) {
-            CardInfoLayout(
-                name = selected.name ?: "",
-                cardNumber = selected.value,
-                type = selected.type,
-                selected = true,
-            )
-        }
-        Box(
-            modifier = Modifier
-                .fillMaxWidth()
-                .wrapContentHeight()
-        ) {
+            selectedPaymentMethod
+                .takeIf { it > -1 }
+                ?.apply {
+                    val paymentMethod = paymentMethods[this]
+                    CardInfoLayout(
+                        name = paymentMethod.name ?: "",
+                        cardNumber = paymentMethod.value,
+                        type = paymentMethod.type,
+                        selected = true,
+                    )
+                }
+                ?: run {
+                    CardInfoLayout(
+                        cardNumber = "Tap to select payment method",
+                        selected = false,
+                    )
+                }
             DropdownMenu(
                 expanded = expanded,
                 onDismissRequest = { expanded = false },
@@ -66,14 +71,13 @@ fun PaymentMethodSection(
                 paymentMethods.forEachIndexed { i, paymentMethod ->
                     DropdownMenuItem(onClick = {
                         expanded = false
-                        selectedIndex = i
-                        selected = paymentMethod
+                        onSelectedPaymentMethod(i)
                     }) {
                         CardInfoLayout(
-                            name = paymentMethod.name ?: "",
+                            name = paymentMethod.name,
                             cardNumber = paymentMethod.value,
                             type = paymentMethod.type,
-                            selected = i == selectedIndex
+                            selected = i == selectedPaymentMethod
                         )
                     }
                 }
@@ -84,9 +88,9 @@ fun PaymentMethodSection(
 
 @Composable
 fun CardInfoLayout(
-    name: String,
+    name: String? = null,
     cardNumber: String,
-    type: PaymentMethodType,
+    type: PaymentMethodType? = null,
     selected: Boolean,
 ) {
     Row(
@@ -105,7 +109,7 @@ fun CardInfoLayout(
         )
         Column(modifier = Modifier.weight(1f)) {
             Text(
-                text = "${type.name} - $name",
+                text = "${type?.name ?: "-"} ${name?.let { "- $it" } ?: ""}",
                 fontWeight = FontWeight.Bold,
                 color = Color.DarkGray,
             )

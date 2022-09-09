@@ -14,6 +14,10 @@ class OrderConfigViewModel : ViewModel() {
     val selectedOrderWindow: LiveData<Int> = _selectedOrderWindow
     private val _userPaymentMethods = MutableLiveData<List<PaymentMethod>>(listOf())
     val userPaymentMethods: LiveData<List<PaymentMethod>> = _userPaymentMethods
+    private val _selectedPaymentMethod = MutableLiveData<Int>()
+    val selectedPaymentMethod: LiveData<Int> = _selectedPaymentMethod
+    private val _isPlaceOrderButtonEnabled = MutableLiveData(false)
+    val isPlaceOrderButtonEnabled: LiveData<Boolean> = _isPlaceOrderButtonEnabled
 
     init {
         _deliveryWindows.value = listOf(
@@ -50,7 +54,17 @@ class OrderConfigViewModel : ViewModel() {
         )
     }
 
-    fun onOrderWindowClicked(id: Int) {
-        _selectedOrderWindow.value = id
+    fun onDeliveryWindowClicked(deliveryWindowId: Int) {
+        _selectedOrderWindow.value = deliveryWindowId
+        _isPlaceOrderButtonEnabled.value = _selectedPaymentMethod.value?.let { it > -1 } ?: false
+    }
+
+    fun onPaymentTypeSelected(paymentMethodId: Int) {
+        _selectedPaymentMethod.value = paymentMethodId
+        _isPlaceOrderButtonEnabled.value = _selectedOrderWindow.value?.let { it > -1 } ?: false
+    }
+
+    fun onPlaceOrder(){
+
     }
 }

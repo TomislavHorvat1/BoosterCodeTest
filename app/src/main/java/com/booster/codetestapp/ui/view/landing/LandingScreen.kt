@@ -17,7 +17,7 @@ import com.globallogic.core.domain.model.FuelPrice
 import org.koin.androidx.compose.getViewModel
 
 @Composable
-fun LandingScreen() {
+fun LandingScreen(onNext: () -> Unit) {
     val viewModel: LandingScreenViewModel = getViewModel()
     val fuelPrice: FuelPrice? by viewModel.fuelPrice.observeAsState()
 
@@ -47,7 +47,7 @@ fun LandingScreen() {
                     modifier = Modifier
                         .fillMaxWidth()
                         .height(48.dp),
-                    onClick = { /* TODO */ }
+                    onClick = onNext
                 )
             }
         }

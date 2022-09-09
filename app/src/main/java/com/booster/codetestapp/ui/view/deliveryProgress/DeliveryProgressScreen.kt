@@ -1,5 +1,6 @@
 package com.booster.codetestapp.ui.view.deliveryProgress
 
+import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
@@ -15,7 +16,7 @@ import com.booster.codetestapp.ui.viewmodel.DeliveryProgressViewModel
 import org.koin.androidx.compose.getViewModel
 
 @Composable
-fun DeliveryProgressScreen() {
+fun DeliveryProgressScreen(onCancel: () -> Unit) {
     val viewModel: DeliveryProgressViewModel = getViewModel()
     val selectedWindow = viewModel.selectedDeliveryWindow.observeAsState().value
     val selectedPaymentMethod = viewModel.selectedPaymentMethod.observeAsState().value
@@ -26,13 +27,17 @@ fun DeliveryProgressScreen() {
                 backgroundColor = Color.White,
                 contentColor = Color.Black,
                 elevation = 0.dp
-            ) { Toolbar {/* TODO */ } }
+            ) { Toolbar(onBack = onCancel) }
         }
     ) {
         Surface(
             modifier = Modifier.fillMaxSize(),
             color = MaterialTheme.colors.background
         ) {
+            BackHandler(
+                enabled = true,
+                onBack = onCancel,
+            )
             Column(
                 verticalArrangement = Arrangement.SpaceBetween,
                 modifier = Modifier.fillMaxSize()
@@ -49,7 +54,8 @@ fun DeliveryProgressScreen() {
                     val cardName = selectedPaymentMethod.type
                     SelectedOptionWindow(
                         label = "Selected payment method",
-                        name = selectedPaymentMethod.name?.let { "$cardName - it" } ?: "$cardName",
+                        name = selectedPaymentMethod.name?.let { "$cardName - it" }
+                            ?: "$cardName",
                         value = selectedPaymentMethod.value,
                         modifier = Modifier.weight(1f)
                     )
@@ -59,7 +65,7 @@ fun DeliveryProgressScreen() {
                     modifier = Modifier
                         .fillMaxWidth()
                         .height(48.dp),
-                    onClick = { /*TODO*/ },
+                    onClick = onCancel,
                     enabled = true
                 )
             }
@@ -75,7 +81,7 @@ private fun Toolbar(onBack: () -> Unit) {
             .wrapContentHeight()
     ) {
         IconButton(
-            onClick = { onBack() },
+            onClick = onBack,
             modifier = Modifier.align(Alignment.CenterVertically),
         ) {
             Icon(Icons.Filled.ArrowBack, null)

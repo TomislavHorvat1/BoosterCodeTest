@@ -17,11 +17,16 @@ import com.booster.codetestapp.ui.viewmodel.OrderConfigViewModel
 import org.koin.androidx.compose.getViewModel
 
 @Composable
-fun OrderConfigurationScreen() {
+fun OrderConfigurationScreen(
+    onPlaceOrderClick: () -> Unit,
+    onBack: () -> Unit,
+) {
     val viewModel: OrderConfigViewModel = getViewModel()
-    val deliveryWindow = viewModel.deliveryWindows.observeAsState()
+    val deliveryWindows = viewModel.deliveryWindows.observeAsState()
     val selectedWindow = viewModel.selectedOrderWindow.observeAsState()
     val userPaymentMethods = viewModel.userPaymentMethods.observeAsState()
+    val selectedPaymentMethod = viewModel.selectedPaymentMethod.observeAsState()
+    val isPlaceOrderButtonEnabled = viewModel.isPlaceOrderButtonEnabled.observeAsState()
 
     Scaffold(
         topBar = {
@@ -29,7 +34,7 @@ fun OrderConfigurationScreen() {
                 backgroundColor = Color.White,
                 contentColor = Color.Black,
                 elevation = 0.dp
-            ) { Toolbar {/* TODO */ } }
+            ) { Toolbar(onBack = onBack) }
         }
     ) {
         Surface(
@@ -43,25 +48,30 @@ fun OrderConfigurationScreen() {
                 verticalArrangement = Arrangement.SpaceBetween
             ) {
                 DeliveryWindowSelection(
-                    morning = deliveryWindow.value?.get(0),
-                    afternoon = deliveryWindow.value?.get(1),
+                    morning = deliveryWindows.value?.get(0),
+                    afternoon = deliveryWindows.value?.get(1),
                     selectedWindow = selectedWindow.value ?: -1,
                     onOrderWindowClicked = { id ->
-                        viewModel.onOrderWindowClicked(id)
+                        viewModel.onDeliveryWindowClicked(id)
                     }
                 )
                 Divider()
                 PaymentMethodSection(
                     paymentMethods = userPaymentMethods.value ?: listOf(),
-                    modifier = Modifier.weight(1f)
+                    selectedPaymentMethod = selectedPaymentMethod.value ?: -1,
+                    onSelectedPaymentMethod = { viewModel.onPaymentTypeSelected(it) },
+                    modifier = Modifier.weight(1f),
                 )
                 GradientButton(
                     text = "Order a Boost",
                     modifier = Modifier
                         .fillMaxWidth()
                         .height(48.dp),
-                    onClick = { /*TODO*/ },
-                    enabled = selectedWindow.value?.let { it > -1 } ?: false
+                    onClick = {
+                        viewModel.onPlaceOrder()
+                        onPlaceOrderClick()
+                    },
+                    enabled = isPlaceOrderButtonEnabled.value ?: false
                 )
             }
         }
@@ -76,7 +86,7 @@ private fun Toolbar(onBack: () -> Unit) {
             .wrapContentHeight()
     ) {
         IconButton(
-            onClick = { onBack() },
+            onClick = onBack,
             modifier = Modifier.align(CenterVertically),
         ) {
             Icon(Icons.Filled.ArrowBack, null)
