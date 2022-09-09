@@ -1,11 +1,11 @@
-package com.booster.codetestapp.data.provider
+package com.booster.codetestapp.framework.provider
 
 import android.content.Context
 import android.content.SharedPreferences
-import com.booster.codetestapp.data.adapter.BoostOrderJsonAdapter
+import com.booster.codetestapp.adapter.BoostOrderJsonAdapter
 import com.globallogic.core.domain.model.BoostOrder
 
-class PreferencesProvider(
+class PrefersManager(
     context: Context,
     private val adapter: BoostOrderJsonAdapter,
 ) {

@@ -1,4 +1,4 @@
-package com.booster.codetestapp.data.adapter
+package com.booster.codetestapp.adapter
 
 import com.globallogic.core.domain.model.BoostOrder
 import com.squareup.moshi.JsonAdapter
