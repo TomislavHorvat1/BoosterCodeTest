@@ -11,15 +11,14 @@ import com.google.android.gms.maps.model.LatLng
 import com.google.maps.android.compose.*
 
 @Composable
-fun MapCard() {
+fun MapCard(modifier: Modifier) {
     val sanFrancisco = LatLng(37.7592212, -122.418432757)
     val cameraPositionState = rememberCameraPositionState {
         position = CameraPosition.fromLatLngZoom(sanFrancisco, 18.5f)
     }
 
     Box(
-        modifier = Modifier
-            .fillMaxHeight(0.80f)
+        modifier = modifier
             .fillMaxWidth()
             .padding(8.dp)
     ) {

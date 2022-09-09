@@ -37,7 +37,7 @@ fun LandingScreen() {
             color = MaterialTheme.colors.background
         ) {
             Column {
-                MapCard()
+                MapCard(modifier = Modifier.weight(1f))
                 PricesFooter(
                     regular = fuelPrice?.regular,
                     premium = fuelPrice?.premium,
